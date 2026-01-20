@@ -1,79 +1,601 @@
-<!-- Curated Tattoo Fonts Collection -->
-<section class="py-24 px-4 bg-neutral-900/50 border-t border-b border-neutral-800 max-w-7xl mx-auto">
-  <h2 class="font-gothic text-5xl md:text-6xl mb-16 text-center text-white reveal-on-scroll">CURATED PICKS</h2>
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-    <!-- 1. Tattoo Fonts Category -->
-    <div class="brutal-card p-6 text-center group">
-      <div class="w-24 h-24 mx-auto mb-4 bg-blood/20 rounded-full flex items-center justify-center group-hover:bg-blood/50 transition-all">
-        <i data-lucide="list" class="w-12 h-12 text-blood"></i>
-      </div>
-      <h3 class="text-xl font-bold mb-2 text-white">All Tattoo Fonts</h3>
-      <p class="text-neutral-400 text-sm mb-6">150k+ options. Blackletter to Chicano. Test in Font Cloud before ink.</p>
-      <a href="https://www.creativefabrica.com/fonts/tattoo-fonts/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="px-6 py-3 bg-blood text-black font-bold uppercase text-sm hover:bg-white transition-all shadow-[0_4px_0_#000]">Browse All</a>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INK & TYPE | Tattoo Fonts for Pros</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Oswald for Brutalist Headers, Space Mono for Tech vibe -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['"Oswald"', 'sans-serif'],
+                        'mono': ['"Space Mono"', 'monospace'],
+                    },
+                    colors: {
+                        'blood': '#ff0000',
+                        'charcoal': '#121212',
+                        'bone': '#e5e5e5',
+                    },
+                    backgroundImage: {
+                        'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.07%22/%3E%3C/svg%3E')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+            cursor: none;
+        }
+        
+        .font-display {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ff0000;
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        body:hover .cursor-outline {
+            width: 60px;
+            height: 60px;
+            border-color: #ff0000;
+            mix-blend-mode: difference;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+            border-left: 1px solid #333;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff0000;
+            border: 2px solid #000;
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.08%22/%3E%3C/svg%3E');
+        }
+
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .brutal-card {
+            background: rgba(20,20,20, 0.8);
+            border: 1px solid #333;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brutal-card:hover {
+            border-color: #ff0000;
+            transform: translate(-4px, -4px);
+            box-shadow: 4px 4px 0px #ff0000;
+        }
+        
+        .accordion-content {
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        .accordion-item.active .accordion-content {
+            max-height: 200px;
+            padding-top: 1rem;
+        }
+
+        .accordion-item.active .lucide-plus {
+            transform: rotate(45deg);
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Image Grayscale Filter */
+        .img-filter {
+            filter: grayscale(100%) contrast(120%);
+            transition: filter 0.5s ease;
+        }
+        .group:hover .img-filter {
+            filter: grayscale(0%) contrast(100%);
+        }
+    </style>
+</head>
+<body class="font-mono overflow-x-hidden selection:bg-blood selection:text-black bg-black">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot hidden md:block"></div>
+    <div class="cursor-outline hidden md:block"></div>
+
+    <!-- Noise Texture Overlay -->
+    <div class="grain-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 border-b border-neutral-800 bg-black/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-display tracking-widest text-white hover:text-blood transition-colors z-50">
+                INK & TYPE
+            </a>
+            <a href="https://www.creativefabrica.com/fonts/tattoo-fonts/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="hidden md:block border border-white px-6 py-2 text-sm uppercase hover:bg-white hover:text-black transition-all font-bold tracking-tighter">
+                Get Access
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex flex-col justify-center items-start pt-20 overflow-hidden">
+        
+        <!-- Hero Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1479767574301-a01c78234a0c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                alt="Tattoo Studio Background" 
+                class="w-full h-full object-cover opacity-60 grayscale"
+            >
+            <!-- Left-aligned gradient for readability -->
+            <div class="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
+        </div>
+
+        <!-- Giant Background Text -->
+        <div class="absolute inset-0 z-0 flex justify-center items-center opacity-10 pointer-events-none mix-blend-overlay">
+            <h1 class="font-display text-[20vw] leading-none text-center select-none text-white">
+                TATTOO<br>FONTS
+            </h1>
+        </div>
+
+        <!-- Hero Content (Left Aligned) -->
+        <div class="z-10 text-left max-w-4xl px-4 mt-10 md:ml-20">
+            <div class="mb-4 inline-block border border-blood px-3 py-1 text-xs text-blood tracking-[0.2em] uppercase bg-black/50 backdrop-blur-sm reveal-on-scroll">
+                2026 Collection
+            </div>
+            <h2 class="text-5xl md:text-8xl font-display text-white mb-6 leading-[0.9] reveal-on-scroll delay-100 drop-shadow-2xl">
+                INK IS <span class="text-blood">FOREVER.</span><br>
+                FONTS SHOULD BE TOO.
+            </h2>
+            <p class="text-neutral-300 max-w-xl mr-auto text-sm md:text-base leading-relaxed mb-10 reveal-on-scroll delay-200 font-bold drop-shadow-md">
+                You spend hours on the sketch. Don't ruin it with a generic system font.
+                Access 150,000+ premium fonts for tattoos, logos, and merch. 
+                <span class="text-white block mt-2">Start with 10 free downloads.</span>
+            </p>
+            
+            <div class="flex flex-col md:flex-row gap-4 justify-start items-center reveal-on-scroll delay-300">
+                <a href="https://www.creativefabrica.com/fonts/tattoo-fonts/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="group relative px-8 py-4 bg-blood text-black font-bold text-lg uppercase tracking-wider overflow-hidden w-full md:w-auto hover:bg-white transition-colors shadow-[0_0_20px_rgba(255,0,0,0.3)]">
+                    <span class="relative z-10 flex items-center justify-center gap-2">
+                        Open Gallery <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </span>
+                </a>
+                <a href="#why-cf" class="px-8 py-4 border border-neutral-500 text-neutral-300 hover:border-white hover:text-white transition-all uppercase text-sm w-full md:w-auto text-center backdrop-blur-sm bg-black/30">
+                    Why Creative Fabrica?
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Infinite Marquee -->
+    <div class="py-6 bg-blood text-black border-y border-black overflow-hidden relative z-20 rotate-1 scale-105 shadow-xl">
+        <div class="marquee-container">
+            <div class="marquee-content font-display text-4xl">
+                OLD ENGLISH • CHICANO • GOTHIC • SCRIPT • BLACKLETTER • TRADITIONAL • CALLIGRAPHY • HANDWRITTEN • OLD ENGLISH • CHICANO • GOTHIC • SCRIPT • BLACKLETTER • TRADITIONAL • CALLIGRAPHY • HANDWRITTEN •
+            </div>
+        </div>
     </div>
-    <!-- 2. Black Ink 4 -->
-    <div class="brutal-card p-6 group relative overflow-hidden">
-      <!-- Replace with your image: <img src="black-ink-4.jpg" class="w-full h-48 object-cover mb-4 img-filter group-hover:grayscale-0"> -->
-      <div class="w-full h-48 bg-neutral-800 mb-4 flex items-center justify-center font-gothic text-4xl text-neutral-500 group-hover:text-blood">Black Ink 4</div>
-      <h3 class="text-xl font-bold mb-2 text-white">Black Ink 4</h3>
-      <p class="text-neutral-400 text-sm mb-6">Bold blackletter kills cheap sketches. Perfect for back pieces — sharp lines hold ink forever.</p>
-      <a href="https://www.creativefabrica.com/product/black-ink-4/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="px-6 py-3 bg-blood text-black font-bold uppercase text-sm hover:bg-white transition-all shadow-[0_4px_0_#000]">Try Black Ink</a>
-    </div>
-    <!-- 3. Tattoo Studio -->
-    <div class="brutal-card p-6 group relative overflow-hidden">
-      <!-- Your image: tattoo-studio.jpg -->
-      <div class="w-full h-48 bg-neutral-800 mb-4 flex items-center justify-center font-serif text-3xl text-neutral-500 group-hover:text-blood italic">Tattoo Studio</div>
-      <h3 class="text-xl font-bold mb-2 text-white">Tattoo Studio</h3>
-      <p class="text-neutral-400 text-sm mb-6">Studio signage demands power. This display font turns names into bold statements — clients notice.</p>
-      <a href="https://www.creativefabrica.com/product/tattoo-studio/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="px-6 py-3 bg-blood text-black font-bold uppercase text-sm hover:bg-white transition-all shadow-[0_4px_0_#000]">Try Tattoo Studio</a>
-    </div>
-    <!-- 4. Underdove -->
-    <div class="brutal-card p-6 group relative overflow-hidden">
-      <!-- underdove.jpg -->
-      <div class="w-full h-48 bg-neutral-800 mb-4 flex items-center justify-center font-mono text-3xl text-neutral-500 group-hover:text-blood">Underdove</div>
-      <h3 class="text-xl font-bold mb-2 text-white">Underdove</h3>
-      <p class="text-neutral-400 text-sm mb-6">Delicate script for subtle tattoos. Flows on ribs/ankles without crowding — elegant pain-free lines.</p>
-      <a href="https://www.creativefabrica.com/product/underdove/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="px-6 py-3 bg-blood text-black font-bold uppercase text-sm hover:bg-white transition-all shadow-[0_4px_0_#000]">Try Underdove</a>
-    </div>
-    <!-- 5. Raven Black -->
-    <div class="brutal-card p-6 group relative overflow-hidden">
-      <!-- raven-black.jpg -->
-      <div class="w-full h-48 bg-neutral-800 mb-4 flex items-center justify-center font-gothic text-3xl text-neutral-500 group-hover:text-blood">Raven Black</div>
-      <h3 class="text-xl font-bold mb-2 text-white">Raven Black</h3>
-      <p class="text-neutral-400 text-sm mb-6">Royal gothic for arms/chests. Luxurious carve holds shading — merch-ready POD license included.</p>
-      <a href="https://www.creativefabrica.com/product/raven-black/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="px-6 py-3 bg-blood text-black font-bold uppercase text-sm hover:bg-white transition-all shadow-[0_4px_0_#000]">Try Raven Black</a>
-    </div>
-    <!-- 6. Tattoo Master -->
-    <div class="brutal-card p-6 group relative overflow-hidden">
-      <!-- tattoo-master.jpg -->
-      <div class="w-full h-48 bg-neutral-800 mb-4 flex items-center justify-center font-bold text-4xl text-neutral-500 group-hover:text-blood">Tattoo Master</div>
-      <h3 class="text-xl font-bold mb-2 text-white">Tattoo Master</h3>
-      <p class="text-neutral-400 text-sm mb-6">Master-level bold for sleeves. Thick strokes survive healing — test your quotes in Font Cloud now.</p>
-      <a href="https://www.creativefabrica.com/product/tattoo-master/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="px-6 py-3 bg-blood text-black font-bold uppercase text-sm hover:bg-white transition-all shadow-[0_4px_0_#000]">Try Tattoo Master</a>
-    </div>
-    <!-- 7. Angelicha 2 -->
-    <div class="brutal-card p-6 group relative overflow-hidden">
-      <!-- angelicha-2.jpg -->
-      <div class="w-full h-48 bg-neutral-800 mb-4 flex items-center justify-center font-serif text-3xl text-neutral-500 group-hover:text-blood">Angelicha 2</div>
-      <h3 class="text-xl font-bold mb-2 text-white">Angelicha 2</h3>
-      <p class="text-neutral-400 text-sm mb-6">Modern blackletter elegance. Blends tradition with edge — ideal for client logos/merch without license hassle.</p>
-      <a href="https://www.creativefabrica.com/product/angelicha-2/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="px-6 py-3 bg-blood text-black font-bold uppercase text-sm hover:bg-white transition-all shadow-[0_4px_0_#000]">Try Angelicha 2</a>
-    </div>
-    <!-- 8. Loyalty Chicano -->
-    <div class="brutal-card p-6 group relative overflow-hidden">
-      <!-- loyalty-chicano.jpg -->
-      <div class="w-full h-48 bg-neutral-800 mb-4 flex items-center justify-center font-cursive text-3xl text-neutral-500 group-hover:text-blood italic">Loyalty Chicano</div>
-      <h3 class="text-xl font-bold mb-2 text-white">Loyalty Chicano</h3>
-      <p class="text-neutral-400 text-sm mb-6">Street chicano for hands/banners. Florida-ready flow — print on tees, no royalties thanks to POD.</p>
-      <a href="https://www.creativefabrica.com/product/loyalty-chicano/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="px-6 py-3 bg-blood text-black font-bold uppercase text-sm hover:bg-white transition-all shadow-[0_4px_0_#000]">Try Loyalty Chicano</a>
-    </div>
-    <!-- 9. Brighton Saster -->
-    <div class="brutal-card p-6 group relative overflow-hidden">
-      <!-- brighton-saster.jpg -->
-      <div class="w-full h-48 bg-neutral-800 mb-4 flex items-center justify-center font-mono text-3xl text-neutral-500 group-hover:text-blood">Brighton Saster</div>
-      <h3 class="text-xl font-bold mb-2 text-white">Brighton Saster</h3>
-      <p class="text-neutral-400 text-sm mb-6">Trash polka grit for experimental pieces. Chaotic geometry reads clean post-healing — procreate-ready.</p>
-      <a href="https://www.creativefabrica.com/product/brighton-saster/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="px-6 py-3 bg-blood text-black font-bold uppercase text-sm hover:bg-white transition-all shadow-[0_4px_0_#000]">Try Brighton Saster</a>
-    </div>
-  </div>
-</section>
+
+    <!-- The Problem (Pain Points) -->
+    <section class="py-24 px-4 bg-neutral-900 border-b border-neutral-800 relative z-10 overflow-hidden">
+        <!-- Background Texture -->
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
+            <div class="reveal-on-scroll">
+                <h3 class="font-display text-4xl md:text-6xl mb-6">BAD FONTS<br>KILL THE SKETCH</h3>
+                <p class="text-neutral-400 mb-6 text-sm md:text-base">
+                    Imagine this: perfect shading, clean lines, solid composition. But the lettering? It looks like it was typed in MS Word. The whole tattoo loses its soul immediately.
+                </p>
+                <ul class="space-y-4 text-sm text-neutral-300">
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="x" class="text-blood w-5 h-5 mt-0.5"></i>
+                        <span>Default fonts have no character or flow.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="x" class="text-blood w-5 h-5 mt-0.5"></i>
+                        <span>Using "free" fonts for merch is legally risky.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="x" class="text-blood w-5 h-5 mt-0.5"></i>
+                        <span>Clients see the same 5 fonts in every shop.</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="relative reveal-on-scroll delay-200">
+                <!-- Visual Metaphor with New Image -->
+                <div class="relative border border-neutral-700 bg-black p-2 rotate-2 hover:rotate-0 transition-transform duration-500 group">
+                    <div class="absolute -top-3 -left-3 w-6 h-6 border-l-2 border-t-2 border-blood z-20"></div>
+                    <div class="absolute -bottom-3 -right-3 w-6 h-6 border-r-2 border-b-2 border-blood z-20"></div>
+                    
+                    <div class="relative overflow-hidden h-[400px]">
+                        <img src="https://images.unsplash.com/photo-1707395293453-26231b245d51?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tattoo Process" class="w-full h-full object-cover img-filter opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        <div class="absolute inset-0 flex flex-col justify-center items-center z-10 bg-black/40 group-hover:bg-transparent transition-colors">
+                             <p class="font-display text-6xl text-center text-white mix-blend-difference">MASTER<br>PIECE</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-2 flex justify-between text-xs text-neutral-500 uppercase tracking-widest border-t border-neutral-800 pt-2 px-2">
+                        <span>EST. 2026</span>
+                        <span>INK DEPT.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bento Grid Features (Why CF?) -->
+    <section id="why-cf" class="py-24 px-4 max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-16 reveal-on-scroll">
+            <h2 class="font-display text-4xl md:text-6xl mb-4">THE ARTIST'S WEAPON</h2>
+            <p class="text-neutral-400 text-sm tracking-widest uppercase">Powered by Creative Fabrica</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 h-auto md:h-[600px]">
+            
+            <!-- Feature 1: Massive Library -->
+            <a href="https://www.creativefabrica.com/fonts/tattoo-fonts/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="brutal-card p-8 md:col-span-2 flex flex-col justify-between reveal-on-scroll group cursor-pointer">
+                <div class="absolute inset-0 z-0 opacity-20 transition-opacity duration-500 group-hover:opacity-40">
+                     <img src="https://images.unsplash.com/photo-1519725842823-382a61dd081a?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover grayscale" alt="Library">
+                </div>
+                <div class="relative z-10">
+                    <div class="flex justify-between items-start mb-4">
+                        <i data-lucide="library" class="w-8 h-8 text-blood"></i>
+                        <span class="text-xs border border-neutral-600 bg-black px-2 py-0.5 rounded-full text-white">Database</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-white">150,000+ Fonts</h3>
+                    <p class="text-neutral-300 text-sm bg-black/50 p-2 inline-block">From classic Blackletter to futuristic Cyberpunk. Find the exact style your client is imagining.</p>
+                </div>
+                <div class="mt-8 font-display text-6xl text-neutral-500 group-hover:text-white transition-colors relative z-10 select-none">A B C D E F G</div>
+            </a>
+
+            <!-- Feature 2: Commercial License -->
+            <div class="brutal-card p-8 flex flex-col justify-center items-center text-center bg-neutral-900 reveal-on-scroll delay-100">
+                <div class="w-16 h-16 border-2 border-white rounded-full flex items-center justify-center mb-4 group-hover:border-blood transition-colors">
+                    <i data-lucide="copyright" class="w-8 h-8 group-hover:text-blood transition-colors text-white"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-white">POD License</h3>
+                <p class="text-neutral-400 text-xs">Print on t-shirts, make stickers, or sell logos. Full commercial freedom included. No hidden fees.</p>
+            </div>
+
+            <!-- Feature 3: Daily Gifts -->
+            <div class="brutal-card p-8 flex flex-col justify-between reveal-on-scroll delay-200">
+                <h3 class="text-xl font-bold text-white">10 Free Downloads</h3>
+                <p class="text-neutral-400 text-sm mb-4">Start your trial today. Grab 10 premium assets for free. Keep them forever.</p>
+                <div class="w-full bg-neutral-800 h-1 mt-2 overflow-hidden">
+                    <div class="h-full bg-blood w-2/3 animate-pulse"></div>
+                </div>
+            </div>
+
+            <!-- Feature 4: Try Before Buy (Font Cloud) -->
+            <div class="brutal-card p-8 md:col-span-2 bg-gradient-to-r from-blood to-red-900 flex flex-col justify-center relative overflow-hidden reveal-on-scroll delay-300">
+                <div class="absolute top-0 right-0 p-32 bg-black rounded-full blur-3xl opacity-30 mix-blend-multiply"></div>
+                <div class="relative z-10">
+                    <h3 class="text-3xl font-bold text-white mb-2">Font Cloud</h3>
+                    <p class="text-white/80 text-sm max-w-md">Test drive before you download. Type your client's text once, see it in every font instantly. Save time on selection.</p>
+                </div>
+                <i data-lucide="cloud-lightning" class="absolute bottom-4 right-4 text-white/20 w-24 h-24 rotate-12"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Styles Showcase (With 8 Examples) -->
+    <section class="py-20 bg-black relative z-10 border-t border-neutral-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="font-display text-5xl mb-12 text-center reveal-on-scroll text-white">STYLES</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                
+                <!-- 1. Black Ink 4 -->
+                <a href="https://www.creativefabrica.com/product/black-ink-4/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="group relative aspect-[580/387] overflow-hidden border border-neutral-800 reveal-on-scroll">
+                    <!-- PLACEHOLDER IMG: Replace with Black Ink 4 image -->
+                    <img src="https://images.unsplash.com/photo-1590246814883-94c455e69184?q=80&w=1974&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover img-filter" alt="Black Ink 4">
+                    <div class="absolute inset-0 bg-black/60 group-hover:bg-transparent transition-all duration-500"></div>
+                    <div class="absolute inset-0 bg-blood/90 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col items-center justify-center p-4 text-center">
+                        <h4 class="font-bold text-black text-xl mb-2 font-display">Black Ink 4</h4>
+                        <p class="text-black text-xs">Dark, aggressive, and timeless.</p>
+                    </div>
+                </a>
+
+                <!-- 2. Tattoo Studio -->
+                <a href="https://www.creativefabrica.com/product/tattoo-studio/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="group relative aspect-[580/387] overflow-hidden border border-neutral-800 reveal-on-scroll delay-100">
+                    <!-- PLACEHOLDER IMG: Replace with Tattoo Studio image -->
+                    <img src="https://images.unsplash.com/photo-1542382156909-9ae37b3f56fd?q=80&w=2000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover img-filter" alt="Tattoo Studio">
+                    <div class="absolute inset-0 bg-black/60 group-hover:bg-transparent transition-all duration-500"></div>
+                    <div class="absolute inset-0 bg-white/90 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col items-center justify-center p-4 text-center">
+                        <h4 class="font-bold text-black text-xl mb-2 font-display">Tattoo Studio</h4>
+                        <p class="text-black text-xs">Authentic parlor vibe.</p>
+                    </div>
+                </a>
+
+                <!-- 3. Underdove -->
+                <a href="https://www.creativefabrica.com/product/underdove/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="group relative aspect-[580/387] overflow-hidden border border-neutral-800 reveal-on-scroll delay-200">
+                    <!-- PLACEHOLDER IMG: Replace with Underdove image -->
+                    <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?q=80&w=2000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover img-filter" alt="Underdove">
+                    <div class="absolute inset-0 bg-black/60 group-hover:bg-transparent transition-all duration-500"></div>
+                    <div class="absolute inset-0 bg-blood/90 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col items-center justify-center p-4 text-center">
+                        <h4 class="font-bold text-black text-xl mb-2 font-display">Underdove</h4>
+                        <p class="text-black text-xs">Elegant lettering.</p>
+                    </div>
+                </a>
+
+                <!-- 4. Raven Black -->
+                <a href="https://www.creativefabrica.com/product/raven-black/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="group relative aspect-[580/387] overflow-hidden border border-neutral-800 reveal-on-scroll delay-300">
+                    <!-- PLACEHOLDER IMG: Replace with Raven Black image -->
+                    <img src="https://images.unsplash.com/photo-1584448082978-05267b789953?q=80&w=2000&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover img-filter" alt="Raven Black">
+                    <div class="absolute inset-0 bg-black/60 group-hover:bg-transparent transition-all duration-500"></div>
+                    <div class="absolute inset-0 bg-white/90 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col items-center justify-center p-4 text-center">
+                        <h4 class="font-bold text-black text-xl mb-2 font-display">Raven Black</h4>
+                        <p class="text-black text-xs">Sharp and mysterious.</p>
+                    </div>
+                </a>
+
+                <!-- 5. Tattoo Master -->
+                <a href="https://www.creativefabrica.com/product/tattoo-master/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="group relative aspect-[580/387] overflow-hidden border border-neutral-800 reveal-on-scroll">
+                    <!-- PLACEHOLDER IMG: Replace with Tattoo Master image -->
+                    <img src="https://images.unsplash.com/photo-1598556776374-14b300f89d53?q=80&w=1935&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover img-filter" alt="Tattoo Master">
+                    <div class="absolute inset-0 bg-black/60 group-hover:bg-transparent transition-all duration-500"></div>
+                    <div class="absolute inset-0 bg-blood/90 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col items-center justify-center p-4 text-center">
+                        <h4 class="font-bold text-black text-xl mb-2 font-display">Tattoo Master</h4>
+                        <p class="text-black text-xs">Traditional bold lines.</p>
+                    </div>
+                </a>
+
+                <!-- 6. Angelicha 2 -->
+                <a href="https://www.creativefabrica.com/product/angelicha-2/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="group relative aspect-[580/387] overflow-hidden border border-neutral-800 reveal-on-scroll delay-100">
+                    <!-- PLACEHOLDER IMG: Replace with Angelicha 2 image -->
+                    <img src="https://images.unsplash.com/photo-1589156191108-c762ff4b96ab?q=80&w=1964&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover img-filter" alt="Angelicha 2">
+                    <div class="absolute inset-0 bg-black/60 group-hover:bg-transparent transition-all duration-500"></div>
+                    <div class="absolute inset-0 bg-white/90 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col items-center justify-center p-4 text-center">
+                        <h4 class="font-bold text-black text-xl mb-2 font-display">Angelicha 2</h4>
+                        <p class="text-black text-xs">Decorative and fluid.</p>
+                    </div>
+                </a>
+
+                <!-- 7. Loyalty Chicano -->
+                <a href="https://www.creativefabrica.com/product/loyalty-chicano/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="group relative aspect-[580/387] overflow-hidden border border-neutral-800 reveal-on-scroll delay-200">
+                    <!-- PLACEHOLDER IMG: Replace with Loyalty Chicano image -->
+                    <img src="https://images.unsplash.com/photo-1621112904887-419379ce6824?q=80&w=2072&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover img-filter" alt="Loyalty Chicano">
+                    <div class="absolute inset-0 bg-black/60 group-hover:bg-transparent transition-all duration-500"></div>
+                    <div class="absolute inset-0 bg-blood/90 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col items-center justify-center p-4 text-center">
+                        <h4 class="font-bold text-black text-xl mb-2 font-display">Loyalty Chicano</h4>
+                        <p class="text-black text-xs">Street lettering style.</p>
+                    </div>
+                </a>
+
+                <!-- 8. Brighton Saster -->
+                <a href="https://www.creativefabrica.com/product/brighton-saster/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="group relative aspect-[580/387] overflow-hidden border border-neutral-800 reveal-on-scroll delay-300">
+                    <!-- PLACEHOLDER IMG: Replace with Brighton Saster image -->
+                    <img src="https://images.unsplash.com/photo-1542226601-bc82e276bc0a?q=80&w=1974&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover img-filter" alt="Brighton Saster">
+                    <div class="absolute inset-0 bg-black/60 group-hover:bg-transparent transition-all duration-500"></div>
+                    <div class="absolute inset-0 bg-white/90 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex flex-col items-center justify-center p-4 text-center">
+                        <h4 class="font-bold text-black text-xl mb-2 font-display">Brighton Saster</h4>
+                        <p class="text-black text-xs">Modern brutalism.</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 px-4 bg-neutral-900/50 border-t border-b border-neutral-800 relative z-10">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="font-display text-4xl md:text-5xl mb-12 text-center text-white reveal-on-scroll">F.A.Q.</h2>
+            
+            <div class="space-y-4 reveal-on-scroll delay-100">
+                <!-- Question 1 -->
+                <div class="accordion-item border border-neutral-700 bg-black hover:border-blood transition-colors cursor-pointer group" onclick="toggleAccordion(this)">
+                    <div class="flex justify-between items-center p-6">
+                        <h3 class="text-lg font-bold text-white group-hover:text-blood transition-colors">Can I use these fonts for merch?</h3>
+                        <i data-lucide="plus" class="text-neutral-500 transform transition-transform duration-300"></i>
+                    </div>
+                    <div class="accordion-content px-6 bg-neutral-900/30">
+                        <p class="text-neutral-400 pb-6 text-sm">
+                            Yes! The subscription includes a Commercial and POD (Print on Demand) license. You can create t-shirts, posters, stickers, and logos for clients without paying extra fees.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="accordion-item border border-neutral-700 bg-black hover:border-blood transition-colors cursor-pointer group" onclick="toggleAccordion(this)">
+                    <div class="flex justify-between items-center p-6">
+                        <h3 class="text-lg font-bold text-white group-hover:text-blood transition-colors">How does the Free Trial work?</h3>
+                        <i data-lucide="plus" class="text-neutral-500 transform transition-transform duration-300"></i>
+                    </div>
+                    <div class="accordion-content px-6 bg-neutral-900/30">
+                        <p class="text-neutral-400 pb-6 text-sm">
+                            You get 10 free downloads immediately. Try the fonts, use them in your projects. If you like it, it renews at just €4.74/month (billed yearly). You can cancel anytime.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="accordion-item border border-neutral-700 bg-black hover:border-blood transition-colors cursor-pointer group" onclick="toggleAccordion(this)">
+                    <div class="flex justify-between items-center p-6">
+                        <h3 class="text-lg font-bold text-white group-hover:text-blood transition-colors">Do they work in Procreate/Photoshop?</h3>
+                        <i data-lucide="plus" class="text-neutral-500 transform transition-transform duration-300"></i>
+                    </div>
+                    <div class="accordion-content px-6 bg-neutral-900/30">
+                        <p class="text-neutral-400 pb-6 text-sm">
+                            Absolutely. You download standard .otf or .ttf files. They install easily on iPad, Mac, or Windows and work in any graphic software.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / CTA -->
+    <section id="pricing" class="py-32 px-4 text-center relative overflow-hidden">
+        <!-- Background Image Parallax -->
+        <div class="absolute inset-0 bg-fixed bg-cover bg-center opacity-20" style="background-image: url('https://images.unsplash.com/photo-1598371839696-5c5e62d5048d?q=80&w=2067&auto=format&fit=crop'); pointer-events: none;"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black"></div>
+
+        <div class="relative z-10 max-w-3xl mx-auto">
+            <h2 class="font-display text-6xl md:text-8xl mb-6 reveal-on-scroll drop-shadow-[0_5px_5px_rgba(0,0,0,1)] text-white">ALL ACCESS</h2>
+            <p class="text-xl mb-10 text-neutral-300 reveal-on-scroll font-bold">
+                Millions of assets. €4.74/month. Cancel anytime.
+            </p>
+            
+            <div class="flex flex-col md:flex-row gap-6 justify-center items-center reveal-on-scroll delay-200">
+                <a href="https://www.creativefabrica.com/fonts/tattoo-fonts/ref/5466775/?campaign=tattoo-fonts" target="_blank" class="group relative inline-flex items-center justify-center px-12 py-6 bg-blood overflow-hidden font-bold text-black uppercase tracking-widest hover:bg-white transition-all duration-300 w-full md:w-auto shadow-[8px_8px_0px_#222] hover:shadow-[4px_4px_0px_#fff] hover:translate-x-1 hover:translate-y-1">
+                    <span class="mr-2">Get 10 Free Downloads</span>
+                    <i data-lucide="external-link" class="w-5 h-5 group-hover:rotate-45 transition-transform"></i>
+                </a>
+            </div>
+            
+            <p class="mt-6 text-xs text-neutral-500 uppercase tracking-widest bg-black/80 inline-block px-4 py-1">
+                * No hidden fees. Keep your downloads forever.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-neutral-800 bg-black pt-16 pb-8 px-4 relative z-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+            <div>
+                <a href="#" class="text-4xl font-display text-white block mb-4">INK & TYPE</a>
+                <p class="text-neutral-500 text-sm max-w-xs">
+                    Curated resources for digital artists and tattoo masters.
+                </p>
+            </div>
+            <!-- Removed social icons as requested -->
+        </div>
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-neutral-900 text-xs text-neutral-700 flex flex-col md:flex-row justify-between">
+            <p>&copy; 2026 INK & TYPE. All rights reserved.</p>
+            <p class="mt-2 md:mt-0">Design influenced by Neo-Brutalism & Tattoo Culture.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Accordion Logic
+        function toggleAccordion(element) {
+            // Close other items
+            const allItems = document.querySelectorAll('.accordion-item');
+            allItems.forEach(item => {
+                if (item !== element) {
+                    item.classList.remove('active');
+                }
+            });
+            // Toggle clicked item
+            element.classList.toggle('active');
+        }
+
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            // Dot follows instantly
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Outline follows with lag
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Intersection Observer for Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
